@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="{% static 'CSS/2.css' %}">
+	<link rel="icon" href="{% static 'LOGO/img2.png' %}" type="image/x-icon">
+	<title>Login Portal</title>
+</head>
+
+<body class="animated_bg">
+	<form method="POST" action="{% url 'login' %}">
+		{% csrf_token %}
+		<div class="container-lg">
+			<div class="row row-content">
+				<div class="col-12 offset-md-3 col-md-6">
+					<h3 id="entry">Welcome</h3><br>
+			</div>
+			<div class="col-12 offset-4 offset-md-5 col-md-7">
+				<img src="{% static 'image/img.jpg' %}" height="60" width="61"></a>
+			</div>
+
+		</div>
+
+
+
+		<div class="row row-content">
+			<div class="col-12 col-md-12">
+				{% if form.non_field_errors %}
+				{% for error in form.non_field_errors %}
+                			<p class="text-danger">*<b>{{ error }}</b></p>
+            	{% endfor %}
+      			{% endif %}
+				<label for="e-mail" class="col-md-2 col-form-label">Email:</label>
+				<div class="col-md-12">
+					<input type="text" placeholder="E-mail" class="form-control" id="e-mail" name="username"></div>
+			</div>
+		</div>
+		<div class="row row-content">
+			<div class="col-12 col-md-12">
+				<label for="password" class="col-md-4 col-form-label">Password:</label>
+				<div class="col-md-12">
+					<input type="password" placeholder="Password" class="form-control" id="password" required name="password"> </div>
+			</div>
+		</div>
+
+		<div class="row row-content">
+			<div class="col-12 col-md-12">
+				<div class="col-md-12">
+					<input type="checkbox" id="remember" name="remember"> <label for="remember" class="col-form-label">Remember Me</label></div>
+			</div>
+		</div>
+
+		<div class="row row-content">
+			<div class="col-12 offset-md-2 col-md-8">
+				<div class="col-12 col-md-12">
+					<input type="submit" class="btn btn-block btn-primary" value="Login"> </div>
+			</div>
+		</div>
+
+		<div class="row row-content">
+
+		</div>
+
+
+	</form>
+
+</body>
+
+</html>

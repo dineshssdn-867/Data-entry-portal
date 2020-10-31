@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script src="{% static 'js/1.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'CSS/1.css' %}">
+	<link rel="icon" href="{% static 'LOGO/img2.png' %}" type="image/x-icon">
+	<title>Data Entry Portal</title>
+</head>
+
+<body class="animated_bg">
+	<nav class="navbar nav nav-pills navbar navbar-dark bg-dark navbar-expand-sm fixed-top">
+		<div class="container-fluid">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar"> <span class="navbar-toggler-icon"></span> </button>
+			<a class="navbar-brand mr-auto" href="{% url 'main' %}"><img src="{% static 'image/img.jpg' %}" height="40" width="41"></a>
+			<div class="collapse navbar-collapse" id="Navbar">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a class="nav-link" href="{% url 'main' %}">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'view' %}">View Entry</a></li>
+					<li class="nav-item"><a class="nav-link active" href="#">Data Entry</a></li>
+				</ul>
+			</div> <span class="navbar-text" id="logout">
+				<a href="{% url 'logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
+			</span>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row">
+			<ol class="col-12 breadcrumb crumb">
+				<li class="breadcrumb-item"><a href="#">Home</a></li>
+				<li class="breadcrumb-item"><a href="#">View Entry</a></li>
+				<li class="breadcrumb-item active">Data Entry</li>
+			</ol>
+		</div>
+	</div>
+	<br>
+	<form method="post" action="{% url 'entry' %}"  enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="container-lg">
+			<div class="row row-content">
+				<div class="col-12 offset-md-4 col-md-4">
+					<h2>Registration Portal</h2> </div>
+			</div>
+			<div class="row row-conten">
+				<div class="col-12 col-md-6">
+					<label for="full_Name" class="col-md-2 col-form-label">Name:</label>
+					<div class="col-md-8">
+						<input type="text" placeholder="Please Enter Full Name" class="form-control" id="full_Name" name="full_Name" required pattern="^[A-Z][a-z ]{1,}[A-Z][a-z]{1,}">
+					</div>
+				</div>
+				<div class="col-12 offset-md-1 col-md-5">
+					<label for="spouse_Name" class="col-md-5 col-form-label">Spouse Name:</label>
+					<div class="col-md-10">
+						<input type="text" placeholder="Please Enter Wife's Name" class="form-control" id="spouse_Name" name="spouse_Name" pattern="^[A-Z][a-z ]{1,}[A-Z][a-z]{6,}">
+					</div>
+				</div>
+			</div>
+			<div class="row row-content">
+				<div class="col-12 col-md-6">
+					<label for="father_Name" class="col-md-4 col-form-label">Father's Name:</label>
+					<div class="col-md-8">
+						<input type="text" placeholder="Please Enter Father's Name" class="form-control" id="father_Name" required name="father_Name" pattern="^[A-Z][a-z ]{1,}[A-Z][a-z]{1,}"> </div>
+				</div>
+				<div class="col-12 offset-md-1 col-md-5">
+					<label for="mother_Name" class="col-md-5 col-form-label">Mother's Name:</label>
+					<div class="col-md-10">
+						<input type="text" placeholder="Please Enter Mother's Name" class="form-control" id="mother_Name" required name="mother_Name" pattern="^[A-Z][a-z ]{1,}[A-Z][a-z]{1,}"> </div>
+				</div>
+			</div>
+			<div class="row row-content">
+			<div class="col-12 col-md-4 ">
+				<label for="Occupation" class="col-md-3 col-form-label">Occupation:</label>
+				<div class="col-md-12">
+					<select id="Occupation" name="Occupation"  class="form-control kem" required>
+						<option value="Please Select occupation">Please Select occupation</option>
+						<option value="Healthcare and medicine">Healthcare and medicine</option>
+						<option value="Arts and entertainment">Arts and entertainment</option>
+						<option value="Business">Business</option>
+						<option value="Industrial and manufacturing">Industrial and manufacturing</option>
+						<option value="Engineer">Engineer</option>
+						<option value="Law enforcement and armed forces">Law enforcement and armed forces</option>
+						<option value="Science and technology">Science and technology</option>
+						<option value="Transport">Transport</option>
+						<option value="Transport">Service(Labour)</option>
+					</select>
+				 </div>
+			</div>
+			<div class="col-12 offset-md-1 col-md-2">
+				<label for="Gender"  class="col-md-3 col-form-label">Gender:</label>
+				<div class="col-md-12">
+					<input id="Gender" type="radio" required name="Gender" value="Male">
+					<label class="form-check-label" for="Gender">Male</label>
+					<input id="Genderf" type="radio"  name="Gender" value="Female">
+					<label class="form-check-label" for="Gender">Female</label>
+				</div>
+			</div>
+			<div class="col-12 col-md-5">
+				<label for="blood_Group" class="col-md-6 col-form-label">Blood Group:</label>
+				<div class="col-md-10">
+					<select id="blood_Group" name="blood_Group" class="form-control kem" required>
+						<option value="Please Select Blood Group">Please Select Blood Group</option>
+						<option value="O+">O+</option>
+						<option value="O-">O-</option>
+						<option value="A+">A+</option>
+						<option value="O+">A-</option>
+						<option value="B+">B+</option>
+						<option value="B-">B-</option>
+						<option value="AB+">AB+</option>
+						<option value="AB-">AB-</option>
+						<option value="Not Known">Not Known</option>
+					</select>
+				</div>
+			</div>
+		</div>
+			<div class="row row-content">
+				<div class="col-12 col-md-6">
+					<label for="birth_date" class="col-md-5 col-form-label">Date of Birth(D.O.B):</label>
+					<div class="col-md-8">
+						<input id="birth_date" type="date" required name="birth_date" class="form-control kem"> </div>
+				</div>
+				<div class="col-12 offset-md-1 col-md-5">
+					<label for="phone" class="col-md-5 col-form-label">Phone Number: </label>
+					<div class="col-md-10">
+						<input type="text" placeholder="Please Enter Phone Number" required id="phone" name="phone" pattern="[+][0-9]{12}" class="form-control" maxlength=13> </div>
+				</div>
+			</div>
+			<div class="row row-content">
+				<div class="col-12 col-md-6">
+					<label for="Darbar" class="col-md-4 col-form-label">Darbar:</label>
+					<div class="col-md-8">
+						<select id="Darbar" name="Darbar" class="form-control kem" required>
+							<option value="Please Select Darbar">Please Select Darbar</option>
+							<option value="Shri Anand Niwas Satsang ,Memnagar">Shri Anand Niwas Satsang ,Memnagar</option>
+							<option value="Shri Anand Niwas Satsang ,Maninagar">Shri Anand Niwas Satsang ,Maninagar</option>
+							<option value="Shri Anand Niwas Satsang ,Sardarnagar">Shri Anand Niwas Satsang ,Sardarnagar</option>
+							<option value="Shri Anand Niwas Satsang ,Saijpur">Shri Anand Niwas Satsang ,Saijpur</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-12 offset-md-1 col-md-5">
+					<label for="Address" class="col-md-4 col-form-label">Address:</label>
+					<div class="col-md-10">
+						<input type="text" required placeholder="Please Enter Address" id="Address" name="Address" class="form-control"> </div>
+				</div>
+			</div>
+			<div class="row row-content">
+				<div class="col-12 col-md-6">
+					<label for="Pincode" class="col-md-4 col-form-label">Pincode</label>
+					<div class="col-md-8">
+						<input type="text" required placeholder="Please Enter Pincode" id="Pincode" name="Pincode" pattern="[0-9]{6}" maxlength=6 class="form-control"> </div>
+				</div>
+				<div class="col-12 offset-md-1 col-md-5">
+					<label for="myfile" class="col-md-4 col-form-label">Image:</label>
+					<input type="file" id="myfile" name="myfile" class="form-control" required>or
+					<i class="fa fa-camera" aria-hidden="true"></i></a>
+			</div>
+			</div>
+			<div class="row row-content">
+				<div class="col-6 offset-md-1 col-md-7">
+					<div class="col-1 offset-md-11 col-md-">
+						<input type="submit" class="btn btn-btn btn-primary" value="Post"> </div>
+				</div>
+				<div class="col-5 offset-md-1 col-md-1">
+					<div class="col-5 col-md-">
+						<input type="reset" class="btn btn-btn btn-primary"> </div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<footer class="container-fluid bg-dark mt-5">
+		<div class="card-lg bg-dark w-150">
+			<div class="card-body">
+				<!-- Copyright -->
+				<div class="footer-copyright text-center" id="footer">© 2020 Copyright: <a href="https://ssdndeepu.com.com/"> SSDNDEEPU</a>
+					<br>All Rights Reserved
+					<br>
+					<p> By using our site, you acknowledge that you have read and understand our
+						<a href="TUS.html" target="_blank">Terms of Service.</a>
+					</p>
+				</div>
+				<!-- Copyright -->
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>
