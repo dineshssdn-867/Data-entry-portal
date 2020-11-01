@@ -20,8 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2^t+dr&2(e5xdih8_qgc3-nq6$s9lm3ek3gr0z%qusy@9p^1mr'
-TWILIO_ACCOUNT_SID=''
-TWILIO_AUTH_TOKEN=''
+TWILIO_ACCOUNT_SID='AC838723d06bedae5035ce6c8cd29e3fce'
+TWILIO_AUTH_TOKEN='5214df04ef2170abc2fd71c65e3a6fb3'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!

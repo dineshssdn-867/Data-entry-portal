@@ -25,7 +25,7 @@ class Post(models.Model):
     ('Not Known', 'Not Known'))
     GENDER_CHOICES = (('Male', 'Male'), ('Female', 'Female'))
     full_Name = models.CharField(max_length=300)
-    spouse_Name = models.CharField(max_length=300)
+    spouse_Name = models.CharField(max_length=300,blank=True,null=True)
     father_Name = models.CharField(max_length=300)
     mother_Name = models.CharField(max_length=300)
     Occupation = models.CharField(max_length=500, null=True, choices=Occupation_CHOICES)
