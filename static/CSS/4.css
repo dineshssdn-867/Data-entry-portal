@@ -13,7 +13,9 @@ input, textarea {
 	padding-top: 3%;
 	min-height: 100px;
 }
-
+.fa-check{
+    color: blue;
+}
 .size {
 	padding: 0%;
 	margin: 0%;
@@ -144,6 +146,10 @@ footer {
 		border-image-source: linear-gradient(left, #21d4fd, #b721ff);
 		background-color: white;
 	}
+
+    .fa-check{
+        color: blue;
+    }
 
 	#detail {
 		text-align: center;

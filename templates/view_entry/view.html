@@ -46,7 +46,7 @@
 					<div class="row"> {% if post.image %}
 						<div class="col-12 col-md-3 fix ml-1"> <img class="card-img fix" src="{{post.image.url}}" alt="{{post.full_Name}}"> </div> {% endif %}
 						<div class="col-12 col-md-8 fix ml-0">
-							<h4 class="card-title">Name: {{post.full_Name}}</h4>
+							<h4 class="card-title">Name: {{post.full_Name}}{% if post.verified %}<img src="{% static 'LOGO/v.png' %}" width="50" height="30" type="image/x-icon">{% endif %}</h4>
 							<h6 class="card-text">Father's name: {{post.father_Name}}</h6>
 							<h6 class="card-text">Gender: {{post.Gender}}</h6>
 							<h6>Phone No: +91 {{post.phone}}</h6>
@@ -70,7 +70,7 @@
 				<div class="card">
 					<div class="col-12 col-md-3 fix ml-1"> {% if post.image %} <img class="card-img fix" src="{{post.image.url}}" alt="{{post.full_Name}}"> </div> {% endif %}
 					<div class="card-body">
-						<h5 class="card-title mb-4">Name: {{post.full_Name}}</h5>
+						<h5 class="card-title mb-4">Name: {{post.full_Name}}{% if post.verified %}<img src="{% static 'LOGO/v.png' %}" width="50" height="30" type="image/x-icon">{% endif %}</h5>
 						<p class="card-text">Father's name: {{post.father_Name}}
 							<br> Phone No: +91 {{post.phone}}
 							<br> Darbar: {{post.Darbar}}

@@ -39,6 +39,9 @@ class Post(models.Model):
     image = models.ImageField(upload_to="images/")
     publishing_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE,default=0,editable=False)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    verified = models.BooleanField(default=False)
 
 
     class Meta:
