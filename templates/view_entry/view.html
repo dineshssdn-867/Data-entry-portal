@@ -25,6 +25,7 @@
 					<li class="nav-item"><a class="nav-link" href="{% url 'main' %}">Home</a></li>
 					<li class="nav-item"><a class="nav-link  active" href="#">View Entry</a></li>
 					<li class="nav-item"><a class="nav-link" href="{% url 'portal' %}">Data Entry</a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'csv' %}">Export to Excel</a></li>
 				</ul>
 				<form class="form-inline mr-3" method="get">
     				<input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
@@ -49,7 +50,7 @@
 							<h4 class="card-title">Name: {{post.full_Name}}{% if post.verified %}<img src="{% static 'LOGO/v.png' %}" width="50" height="30" type="image/x-icon">{% endif %}</h4>
 							<h6 class="card-text">Father's name: {{post.father_Name}}</h6>
 							<h6 class="card-text">Gender: {{post.Gender}}</h6>
-							<h6>Phone No: +91 {{post.phone}}</h6>
+							<h6>Phone No: {{post.phone}}</h6>
 							<h6>Darbar: {{post.Darbar}}</h6>
 							<h6>Address:{{post.Address}}</h6> </div>
 					</div>
@@ -72,7 +73,7 @@
 					<div class="card-body">
 						<h5 class="card-title mb-4">Name: {{post.full_Name}}{% if post.verified %}<img src="{% static 'LOGO/v.png' %}" width="50" height="30" type="image/x-icon">{% endif %}</h5>
 						<p class="card-text">Father's name: {{post.father_Name}}
-							<br> Phone No: +91 {{post.phone}}
+							<br> Phone No:{{post.phone}}
 							<br> Darbar: {{post.Darbar}}
 							<br> Address: {{post.Address}}</p>
 					</div>

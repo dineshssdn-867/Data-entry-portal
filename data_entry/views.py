@@ -1,15 +1,17 @@
-import json
+import csv
 
+import xlwt
 from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.http import HttpResponse, request
 from django.shortcuts import render, redirect, get_object_or_404
+from datetime import datetime
 from .forms import PostForm
 from .models import Post
 from twilio.rest import Client
-
 
 
 @login_required
@@ -52,9 +54,9 @@ def entry_view(request):
         val_la = int(float(post.latitude))
         val_lo = int(float(post.longitude))
         if val_la == 23 and val_lo == 72:
-            post.verified=True
+            post.verified = True
         else:
-            post.verified=False
+            post.verified = False
         number = str(post.phone)
         value = str(
             'Full_Name: ' + post.full_Name + '\n Spouse_Name: ' + post.spouse_Name + '\n Occupation: ' + post.Occupation + '\n Gender: ' + post.Gender + '\n Blood_Group: ' + post.blood_Group + '\n Phone_Number: ' + str(
@@ -120,3 +122,20 @@ def update_entry(request, id):
         'form': form
     }
     return render(request, 'view_entry/update.html', context)
+
+
+@login_required(login_url='index')
+def export_excel(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="users.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['full_Name', 'spouse_Name', 'father_Name', 'mother_Name', 'Occupation', 'Gender', 'blood_Group',
+               'birth_date', 'phone', 'Darbar', 'Address', 'Pincode'])
+
+    users = Post.objects.all().values_list('full_Name', 'spouse_Name', 'father_Name', 'mother_Name', 'Occupation', 'Gender', 'blood_Group',
+               'birth_date', 'phone', 'Darbar', 'Address', 'Pincode')
+    for user in users:
+        writer.writerow(user)
+
+    return response

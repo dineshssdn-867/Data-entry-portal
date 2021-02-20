@@ -11,5 +11,6 @@ urlpatterns = [
     path('view', view_entry,name="view"),
     path('delete/<int:id>',delete_entry,name="delete"),
     path('logout',logout_request,name='logout'),
-    path('update/<int:id>',update_entry,name="update")
+    path('update/<int:id>',update_entry,name="update"),
+    path('csv', export_excel, name="csv")
 ]
