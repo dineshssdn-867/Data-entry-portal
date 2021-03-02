@@ -27,7 +27,7 @@ TWILIO_AUTH_TOKEN='37db2b54f8af4a45ec2314ce6eb81c19'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['shri-data-portal.herokuapp.com']
+ALLOWED_HOSTS = ['shri-data-portal.herokuapp.com', '127.0.0.1']
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyCy5tNQW8jP_DIzAPDDPa2R7qN5RbfC0FM'
 
@@ -120,12 +120,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
