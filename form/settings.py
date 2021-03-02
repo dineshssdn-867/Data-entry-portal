@@ -27,7 +27,7 @@ TWILIO_AUTH_TOKEN='37db2b54f8af4a45ec2314ce6eb81c19'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['shri-data-portal.herokuapp.com']
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyCy5tNQW8jP_DIzAPDDPa2R7qN5RbfC0FM'
 
