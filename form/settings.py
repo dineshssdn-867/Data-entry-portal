@@ -20,8 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2^t+dr&2(e5xdih8_qgc3-nq6$s9lm3ek3gr0z%qusy@9p^1mr'
-TWILIO_ACCOUNT_SID='twilio service'
-TWILIO_AUTH_TOKEN='twilio service'
+TWILIO_ACCOUNT_SID='AC838723d06bedae5035ce6c8cd29e3fce'
+TWILIO_AUTH_TOKEN='37db2b54f8af4a45ec2314ce6eb81c19'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -29,7 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-GOOGLE_MAPS_API_KEY = 'google api service'
+GOOGLE_MAPS_API_KEY = 'AIzaSyCy5tNQW8jP_DIzAPDDPa2R7qN5RbfC0FM'
 
 # Application definition
 
