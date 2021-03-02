@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2^t+dr&2(e5xdih8_qgc3-nq6$s9lm3ek3gr0z%qusy@9p^1mr'
 TWILIO_ACCOUNT_SID='AC838723d06bedae5035ce6c8cd29e3fce'
-TWILIO_AUTH_TOKEN='37db2b54f8af4a45ec2314ce6eb81c19'
+TWILIO_AUTH_TOKEN='e97d86b1105a12c729c0d0a89f216a10'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
