@@ -28,8 +28,8 @@
 					<li class="nav-item"><a class="nav-link" href="{% url 'csv' %}">Export to Excel</a></li>
 				</ul>
 				<form class="form-inline mr-3" method="get">
-    				<input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
-    				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					<input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
 			</div> <span class="navbar-text" id="logout">
 				<a href="{% url 'logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
@@ -55,12 +55,8 @@
 							<h6>Address:{{post.Address}}</h6> </div>
 					</div>
 					<div class="row mt-0 size">
-						<div class="col-12 offset-md-8 col-md-2">
-							<a href="{% url 'update' post.id %}" class="btn btn-primary btn-sm">View Entry</a>
-						</div>
-						<div class="col-12 col-md-2 mb-2">
-							<a href="{% url 'delete' post.id %}" class="btn btn-danger btn-sm">Delete Entry</a>
-						</div>
+						<div class="col-12 offset-md-8 col-md-2"> <a href="{% url 'update' post.id %}" class="btn btn-primary btn-sm">View Entry</a> </div>
+						<div class="col-12 col-md-2 mb-2"> <a href="{% url 'delete' post.id %}" class="btn btn-danger btn-sm">Delete Entry</a> </div>
 					</div>
 					<div class="card-footer"> <small class="text-muted">Last Updated {{post.publishing_date}} by {{post.user}}</small> </div>
 				</div>
@@ -78,12 +74,8 @@
 							<br> Address: {{post.Address}}</p>
 					</div>
 					<div class="row mt-0">
-						<div class="ml-2 col-6">
-							<a href="{% url 'update' post.id %}" class="btn btn-primary btn-sm">View Entry</a>
-						</div>
-						<div class="col-5 col-md-2 mb-1">
-							<a href="{% url 'delete' post.id %}" class="btn btn-danger btn-sm">Delete Entry</a>
-						</div>
+						<div class="ml-2 col-6"> <a href="{% url 'update' post.id %}" class="btn btn-primary btn-sm">View Entry</a> </div>
+						<div class="col-5 col-md-2 mb-1"> <a href="{% url 'delete' post.id %}" class="btn btn-danger btn-sm">Delete Entry</a> </div>
 					</div>
 					<div class="card-footer"> <small class="text-muted">Last Updated {{post.publishing_date}} by {{post.user}}</small> </div>
 				</div>
@@ -92,21 +84,15 @@
 		<br> {% endfor %}
 		<div class="row row-content">
 			<div class="col-12 offset-md-5 col-md-4">
-				<div class="pagination">
-				<span class="step-links">
+				<div class="pagination"> <span class="step-links">
 					{% if posts.has_previous %}
             			<a href="?page={{ posts.previous_page_number }}  {% if request.GET.q %}&q=={{request.GET.q}}{% endif %} "><i class="fa fa-lg fa-arrow-left" aria-hidden="true"></i></a>
         			{% endif %}
 
         			<span class="current">
             			Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-        			</span>
-
-        			{% if posts.has_next %}
-            			<a href="?page={{ posts.next_page_number }}  {% if request.GET.q %}&q=={{request.GET.q}}{% endif %} "><i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i></a>
-        			{% endif %}
-    		</span>
-		</div>
+        			</span> {% if posts.has_next %} <a href="?page={{ posts.next_page_number }}  {% if request.GET.q %}&q=={{request.GET.q}}{% endif %} "><i class="fa fa-lg fa-arrow-right" aria-hidden="true"></i></a> {% endif %} </span>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -16,8 +16,6 @@
 	<title>Data Entry Portal</title>
 </head>
 
-
-
 <body class="animated_bg">
 	<nav class="navbar nav nav-pills navbar navbar-dark bg-dark navbar-expand-sm fixed-top">
 		<div class="container-fluid">
@@ -45,18 +43,14 @@
 		</div>
 	</div>
 	<br>
-	<form method="post" action=""  enctype="multipart/form-data">
-		{% csrf_token %}
+	<form method="post" action="" enctype="multipart/form-data"> {% csrf_token %}
 		<div class="container-lg">
 			<div class="row row-content">
 				<div class="col-12 offset-md-4 col-md-4">
-					<h2>Registration Portal</h2>
-				</div>
+					<h2>Registration Portal</h2> </div>
 			</div>
 			<table>
-			<div class="row row-conten">
-				{{form.as_table}}
-			</div>
+				<div class="row row-conten"> {{form.as_table}} </div>
 			</table>
 			<div class="row row-content">
 				<div class="col-6 offset-md-1 col-md-7">
@@ -71,25 +65,26 @@
 		</div>
 	</form>
 </body>
-
-	<footer class="container-fluid bg-dark mt-5">
-		<div class="card-lg bg-dark w-150">
-			<div class="card-body">
-				<!-- Copyright -->
-				<div class="footer-copyright text-center" id="footer">© 2020 Copyright: <a href="https://ssdndeepu.com.com/"> SSDNDEEPU</a>
-					<br>All Rights Reserved
-					<br>
-					<p> By using our site, you acknowledge that you have read and understand our
-						<a href="TUS.html" target="_blank">Terms of Service.</a>
-					</p>
-				</div>
-				<!-- Copyright -->
+<footer class="container-fluid bg-dark mt-5">
+	<div class="card-lg bg-dark w-150">
+		<div class="card-body">
+			<!-- Copyright -->
+			<div class="footer-copyright text-center" id="footer">© 2020 Copyright: <a href="https://ssdndeepu.com.com/"> SSDNDEEPU</a>
+				<br>All Rights Reserved
+				<br>
+				<p> By using our site, you acknowledge that you have read and understand our <a href="TUS.html" target="_blank">Terms of Service.</a> </p>
 			</div>
+			<!-- Copyright -->
 		</div>
-	</footer>
-	<script type="text/javascript">
-  		document.getElementById("Darbar").value = {{single.Darbar}};
-	</script>
+	</div>
+</footer>
+<script type="text/javascript">
+document.getElementById("Darbar").value = {
+	{
+		single.Darbar
+	}
+};
+</script>
 </body>
 
 </html>

@@ -42,8 +42,7 @@
 		</div>
 	</div>
 	<br>
-	<form method="post" action="{% url 'entry' %}"  enctype="multipart/form-data">
-		{% csrf_token %}
+	<form method="post" action="{% url 'entry' %}" enctype="multipart/form-data"> {% csrf_token %}
 		<div class="container-lg">
 			<div class="row row-content">
 				<div class="col-12 offset-md-4 col-md-4">
@@ -53,14 +52,12 @@
 				<div class="col-12 col-md-6">
 					<label for="full_Name" class="col-md-2 col-form-label">Name:</label>
 					<div class="col-md-8">
-						<input type="text" placeholder="Please Enter Full Name" class="form-control" id="full_Name" name="full_Name" required pattern="^[A-Z][a-z ]{1,}[A-Z][a-z]{1,}">
-					</div>
+						<input type="text" placeholder="Please Enter Full Name" class="form-control" id="full_Name" name="full_Name" required pattern="^[A-Z][a-z ]{1,}[A-Z][a-z]{1,}"> </div>
 				</div>
 				<div class="col-12 offset-md-1 col-md-5">
 					<label for="spouse_Name" class="col-md-5 col-form-label">Spouse Name:</label>
 					<div class="col-md-10">
-						<input type="text" placeholder="Please Enter Wife's Name" class="form-control" id="spouse_Name" name="spouse_Name" pattern="^[A-Z][a-z ]{1,}[A-Z][a-z]{6,}">
-					</div>
+						<input type="text" placeholder="Please Enter Wife's Name" class="form-control" id="spouse_Name" name="spouse_Name" pattern="^[A-Z][a-z ]{1,}[A-Z][a-z]{6,}"> </div>
 				</div>
 			</div>
 			<div class="row row-content">
@@ -76,50 +73,50 @@
 				</div>
 			</div>
 			<div class="row row-content">
-			<div class="col-12 col-md-4 ">
-				<label for="Occupation" class="col-md-3 col-form-label">Occupation:</label>
-				<div class="col-md-12">
-					<select id="Occupation" name="Occupation"  class="form-control kem" required>
-						<option value="Please Select occupation">Please Select occupation</option>
-						<option value="Healthcare and medicine">Healthcare and medicine</option>
-						<option value="Arts and entertainment">Arts and entertainment</option>
-						<option value="Business">Business</option>
-						<option value="Industrial and manufacturing">Industrial and manufacturing</option>
-						<option value="Engineer">Engineer</option>
-						<option value="Law enforcement and armed forces">Law enforcement and armed forces</option>
-						<option value="Science and technology">Science and technology</option>
-						<option value="Transport">Transport</option>
-						<option value="Transport">Service(Labour)</option>
-					</select>
-				 </div>
-			</div>
-			<div class="col-12 offset-md-1 col-md-2">
-				<label for="Gender"  class="col-md-3 col-form-label">Gender:</label>
-				<div class="col-md-12">
-					<input id="Gender" type="radio" required name="Gender" value="Male">
-					<label class="form-check-label" for="Gender">Male</label>
-					<input id="Genderf" type="radio"  name="Gender" value="Female">
-					<label class="form-check-label" for="Gender">Female</label>
+				<div class="col-12 col-md-4 ">
+					<label for="Occupation" class="col-md-3 col-form-label">Occupation:</label>
+					<div class="col-md-12">
+						<select id="Occupation" name="Occupation" class="form-control kem" required>
+							<option value="Please Select occupation">Please Select occupation</option>
+							<option value="Healthcare and medicine">Healthcare and medicine</option>
+							<option value="Arts and entertainment">Arts and entertainment</option>
+							<option value="Business">Business</option>
+							<option value="Industrial and manufacturing">Industrial and manufacturing</option>
+							<option value="Engineer">Engineer</option>
+							<option value="Law enforcement and armed forces">Law enforcement and armed forces</option>
+							<option value="Science and technology">Science and technology</option>
+							<option value="Transport">Transport</option>
+							<option value="Transport">Service(Labour)</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-12 offset-md-1 col-md-2">
+					<label for="Gender" class="col-md-3 col-form-label">Gender:</label>
+					<div class="col-md-12">
+						<input id="Gender" type="radio" required name="Gender" value="Male">
+						<label class="form-check-label" for="Gender">Male</label>
+						<input id="Genderf" type="radio" name="Gender" value="Female">
+						<label class="form-check-label" for="Gender">Female</label>
+					</div>
+				</div>
+				<div class="col-12 col-md-5">
+					<label for="blood_Group" class="col-md-6 col-form-label">Blood Group:</label>
+					<div class="col-md-10">
+						<select id="blood_Group" name="blood_Group" class="form-control kem" required>
+							<option value="Please Select Blood Group">Please Select Blood Group</option>
+							<option value="O+">O+</option>
+							<option value="O-">O-</option>
+							<option value="A+">A+</option>
+							<option value="O+">A-</option>
+							<option value="B+">B+</option>
+							<option value="B-">B-</option>
+							<option value="AB+">AB+</option>
+							<option value="AB-">AB-</option>
+							<option value="Not Known">Not Known</option>
+						</select>
+					</div>
 				</div>
 			</div>
-			<div class="col-12 col-md-5">
-				<label for="blood_Group" class="col-md-6 col-form-label">Blood Group:</label>
-				<div class="col-md-10">
-					<select id="blood_Group" name="blood_Group" class="form-control kem" required>
-						<option value="Please Select Blood Group">Please Select Blood Group</option>
-						<option value="O+">O+</option>
-						<option value="O-">O-</option>
-						<option value="A+">A+</option>
-						<option value="O+">A-</option>
-						<option value="B+">B+</option>
-						<option value="B-">B-</option>
-						<option value="AB+">AB+</option>
-						<option value="AB-">AB-</option>
-						<option value="Not Known">Not Known</option>
-					</select>
-				</div>
-			</div>
-		</div>
 			<div class="row row-content">
 				<div class="col-12 col-md-6">
 					<label for="birth_date" class="col-md-5 col-form-label">Date of Birth(D.O.B):</label>
@@ -159,9 +156,7 @@
 				</div>
 				<div class="col-12 offset-md-1 col-md-5">
 					<label for="myfile" class="col-md-4 col-form-label">Image:</label>
-					<input type="file" id="myfile" name="myfile" class="form-control" required>or
-					<i class="fa fa-camera" aria-hidden="true"></i>
-			</div>
+					<input type="file" id="myfile" name="myfile" class="form-control" required>or <i class="fa fa-camera" aria-hidden="true"></i> </div>
 			</div>
 			<div class="row row-content">
 				<div class="col-6 offset-md-1 col-md-7">
@@ -182,13 +177,12 @@
 				<div class="footer-copyright text-center" id="footer">© 2020 Copyright: <a href="https://ssdndeepu.com.com/"> SSDNDEEPU</a>
 					<br>All Rights Reserved
 					<br>
-					<p> By using our site, you acknowledge that you have read and understand our
-						<a href="TUS.html" target="_blank">Terms of Service.</a>
-					</p>
+					<p> By using our site, you acknowledge that you have read and understand our <a href="TUS.html" target="_blank">Terms of Service.</a> </p>
 				</div>
 				<!-- Copyright -->
 			</div>
 		</div>
 	</footer>
 </body>
+
 </html>

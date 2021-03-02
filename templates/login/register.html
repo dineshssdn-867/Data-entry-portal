@@ -1,15 +1,6 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content%}
-
+{% extends 'base.html' %} {% load static %} {% block content%}
 <div class="container">
-    <h3>Login Form</h3>
-    <form method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Register">
-    </form>
-
-</div>
-
-{% endblock %}
+	<h3>Login Form</h3>
+	<form method="post"> {% csrf_token %} {{form.as_p}}
+		<input type="submit" value="Register"> </form>
+</div> {% endblock %}
