@@ -18,7 +18,7 @@ def home_view(request):
     return render(request, "main/home.html", context)
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def portal_view(request):
     users = Account.objects.filter(id=request.user.id).values('city')
     city = ''
@@ -28,7 +28,7 @@ def portal_view(request):
     return render(request, 'data_entry/dataentry.html', context)
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def entry_view(request):
     if request.method == 'POST':
         post = Post()
@@ -59,13 +59,13 @@ def entry_view(request):
         return render(request, 'data_entry/dataentry.html')
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def camera_view(request):
     return render(request, "data_entry/winner.html")
 
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def view_entry(request):
     users = Account.objects.filter(id=request.user.id).values('city')
     city = ''
@@ -81,7 +81,7 @@ def view_entry(request):
     return render(request, 'view_entry/view.html', context)
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def delete_entry(request, id):
     post = get_object_or_404(Post, id=id)
     post.flag = 0
@@ -89,13 +89,13 @@ def delete_entry(request, id):
     return redirect('data_entry:view')
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def logout_request(request):
     logout(request)
     return redirect("index")
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def update_entry(request, id):
     post = get_object_or_404(Post, id=id)
     form = PostForm(request.POST or None, request.FILES or None, instance=post)
@@ -108,7 +108,7 @@ def update_entry(request, id):
     return render(request, 'view_entry/update.html', context)
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def export_excel(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="users.csv"'

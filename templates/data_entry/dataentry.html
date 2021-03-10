@@ -24,7 +24,9 @@
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:main' %}">Home</a></li>
+					{% if user.is_admin %}
 					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:view' %}">View Entry</a></li>
+					{% endif %}
 					<li class="nav-item"><a class="nav-link active" href="#">Data Entry</a></li>
 				</ul>
 			</div> <span class="navbar-text" id="logout">

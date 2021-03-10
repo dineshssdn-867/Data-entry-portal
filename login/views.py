@@ -21,7 +21,7 @@ def login_vew(request):
         return render(request, "login/login.html")
 
 
-@login_required(login_url='index')
+@login_required(login_url='login:index')
 def logout_request(request):
     logout(request)
     return redirect("login:index")

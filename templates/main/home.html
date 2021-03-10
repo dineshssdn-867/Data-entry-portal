@@ -26,7 +26,9 @@
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link active" href="#">Home</a></li>&nbsp;&nbsp;
-					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:view' %}">View Entry</a></li>&nbsp;&nbsp;
+					{% if user.is_admin %}
+					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:view' %}">View Entry</a></li>
+					{% endif %}&nbsp;&nbsp;
 					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:portal' %}">Data Entry</a></li>&nbsp;&nbsp; </ul>
 			</div> <span class="navbar-text" id="logout">
 				<a  href="{% url 'login:logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
