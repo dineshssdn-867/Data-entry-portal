@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2^t+dr&2(e5xdih8_qgc3-nq6$s9lm3ek3gr0z%qusy@9p^1mr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['shri-data-portal.herokuapp.com', '127.0.0.1']
 
