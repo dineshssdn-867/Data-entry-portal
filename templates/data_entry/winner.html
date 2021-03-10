@@ -1,90 +1,51 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	<title>Capture picture from your webcam</title>
-	<style type="text/css">
-	body {
-		font-family: Helvetica, sans-serif;
-	}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+   const vid = document.querySelector('video');
+navigator.mediaDevices.getUserMedia({video: true}) // request cam
+.then(stream => {
+  vid.srcObject = stream; // don't use createObjectURL(MediaStream)
+  return vid.play(); // returns a Promise
+})
+.then(()=>{ // enable the button
+  const btn = document.querySelector('button');
+  btn.disabled = false;
+  btn.onclick = e => {
+    takeASnap()
+    .then(download);
+  };
+});
 
-	h2,
-	h3 {
-		margin-top: 0;
-	}
+function takeASnap(){
+  const canvas = document.createElement('canvas'); // create a canvas
+  const ctx = canvas.getContext('2d'); // get its context
+  canvas.width = vid.videoWidth; // set its size to the one of the video
+  canvas.height = vid.videoHeight;
+  ctx.drawImage(vid, 0,0); // the video
+  return new Promise((res, rej)=>{
+    canvas.toBlob(res, 'image/jpeg'); // request a Blob from the canvas
+  });
+}
+function download(blob){
+  // uses the <a download> to download a Blob
+  let a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'screenshot.jpg';
+  console.log(a)
+  document.body.appendChild(a);
+  a.click();
 
-	form {
-		margin-top: 15px;
-	}
-
-	form > input {
-		margin-right: 15px;
-	}
-
-	#results {
-		margin: 20px;
-		padding: 20px;
-		border: 1px solid;
-		background: #ccc;
-	}
-	</style>
+}
+});
+</script>
 </head>
-
 <body>
-	<h1>WebcamJS Test Page - HD Capture</h1>
-	<h3>Demonstrates 720p HD capture (1280x720), if your camera supports it!</h3>
-	<div id="my_camera"></div>
-	<!-- First, include the Webcam.js JavaScript Library -->
-	<script type="text/javascript" src="{% static 'js/webcam.js' %}"></script>
-	<!-- Configure a few settings and attach camera -->
-	<script language="JavaScript">
-	Webcam.set({
-		width: 1280,
-		height: 720,
-		image_format: 'jpeg',
-		jpeg_quality: 90,
-		constraints: {
-			width: {
-				exact: 1280
-			},
-			height: {
-				exact: 720
-			}
-		}
-	});
-	Webcam.attach('#my_camera');
-	</script>
-	<!-- A button for taking snaps -->
-	<form action="{% url 'portal' %}">
-		<div class="row"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<div class="col-12 offset-md-9 col-md-1">
-				<input type="button" class="btn btn-btn btn-primary" class="left" value="Take a Snap" id="btPic" onclick="takeSnapShot()" /> </div>&nbsp;&nbsp;&nbsp;
-			<div class="col-12 col-md-1">
-				<input type="button" class="btn btn-btn btn-primary" class="left" value="Ok" id="do" onclick="myFunction()" /> </div>
-		</div>
-	</form>
-	<!-- Code to handle taking the snapshot and displaying it locally -->
-	<script language="JavaScript">
-	function take_snapshot() {
-		// take snapshot and get image data
-		Webcam.snap(function(data_uri) {
-			// display results in page
-			document.getElementById('results').innerHTML = '<h2>Here is your large image:</h2>' + '<img src="' + data_uri + '"/>';
-		});
-	}
+<button disabled>
+  take a snapshot</button>
+<video></video>
 
-	function myFunction() {
-		return window.close();
-	}
-	</script>
-	<div id="results" name="result">Your captured image will appear here...</div>
 </body>
-
 </html>

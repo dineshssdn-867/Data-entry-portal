@@ -1,17 +1,12 @@
 import csv
-
-import xlwt
-from django.conf import settings
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import Q
-from django.http import HttpResponse, request
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from datetime import datetime
+from users.models import Account
 from .forms import PostForm
-from .models import Post
-from twilio.rest import Client
+from .models import Post, Darbar
 
 
 @login_required
@@ -25,7 +20,12 @@ def home_view(request):
 
 @login_required(login_url='index')
 def portal_view(request):
-    return render(request, 'data_entry/dataentry.html')
+    users = Account.objects.filter(id=request.user.id).values('city')
+    city = ''
+    for user in users:
+        city = str(user['city'])
+    context = {'darbars': list(Darbar.objects.filter(darbar_city=city).values('darbar_name'))}
+    return render(request, 'data_entry/dataentry.html', context)
 
 
 @login_required(login_url='index')
@@ -49,29 +49,12 @@ def entry_view(request):
         post.Pincode = request.POST['Pincode']
         post.image = request.FILES['myfile']
         post.user = request.user
-        post.latitude = request.ipinfo.latitude
-        post.longitude = request.ipinfo.longitude
-        val_la = int(float(post.latitude))
-        val_lo = int(float(post.longitude))
-        if val_la == 23 and val_lo == 72:
-            post.verified = True
-        else:
-            post.verified = False
-        number = str(post.phone)
-        value = str(
-            'Full_Name: ' + post.full_Name + '\n Spouse_Name: ' + post.spouse_Name + '\n Occupation: ' + post.Occupation + '\n Gender: ' + post.Gender + '\n Blood_Group: ' + post.blood_Group + '\n Phone_Number: ' + str(
-                number) + '\n Darbar: ' + post.Darbar + '\n Address: ' + post.Address + '\n Pincode: ' + post.Pincode)
-        client = client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-        message = client.messages.create(
-            body=value,
-            from_='+13134374671',
-            to=number
-        )
+        post.city = request.user.city
         post.save()
-        for full_Name in Post.objects.values_list('full_Name', flat=True).distinct():
-            Post.objects.filter(
-                pk__in=Post.objects.filter(full_Name=full_Name).values_list('id', flat=True)[1:]).delete()
-        return redirect("main")
+        #for full_Name, father_Name, mother_Name in Post.objects.values_list('full_Name','father_Name', 'mother_Name', flat=False).distinct():
+        #    Post.objects.filter(
+        #        pk__in=Post.objects.filter(full_Name=full_Name, father_Name=father_Name, mother_Name=mother_Name).values_list('id', flat=False)[1:]).delete()
+        return redirect("data_entry:main")
     else:
         return render(request, 'data_entry/dataentry.html')
 
@@ -81,14 +64,14 @@ def camera_view(request):
     return render(request, "data_entry/winner.html")
 
 
+
 @login_required(login_url='index')
 def view_entry(request):
-    post_list = Post.objects.all().order_by("-id")
-    query = request.GET.get('q')
-
-    if query:
-        post_list = post_list.filter(Q(full_Name__icontains=query))
-
+    users = Account.objects.filter(id=request.user.id).values('city')
+    city = ''
+    for user in users:
+        city = str(user['city'])
+    post_list = Post.objects.filter(city=city)
     paginator = Paginator(post_list, 3)
     page = request.GET.get('page')
     post_list = paginator.get_page(page)
@@ -101,8 +84,9 @@ def view_entry(request):
 @login_required(login_url='index')
 def delete_entry(request, id):
     post = get_object_or_404(Post, id=id)
-    post.delete()
-    return redirect('view')
+    post.flag = 0
+    post.save()
+    return redirect('data_entry:view')
 
 
 @login_required(login_url='index')
@@ -117,7 +101,7 @@ def update_entry(request, id):
     form = PostForm(request.POST or None, request.FILES or None, instance=post)
     if form.is_valid():
         post.save()
-        return redirect('view')
+        return redirect('data_entry:view')
     context = {
         'form': form
     }
@@ -131,10 +115,11 @@ def export_excel(request):
 
     writer = csv.writer(response)
     writer.writerow(['full_Name', 'spouse_Name', 'father_Name', 'mother_Name', 'Occupation', 'Gender', 'blood_Group',
-               'birth_date', 'phone', 'Darbar', 'Address', 'Pincode'])
+                     'birth_date', 'phone', 'Darbar', 'Address', 'Pincode'])
 
-    users = Post.objects.all().values_list('full_Name', 'spouse_Name', 'father_Name', 'mother_Name', 'Occupation', 'Gender', 'blood_Group',
-               'birth_date', 'phone', 'Darbar', 'Address', 'Pincode')
+    users = Post.objects.all().values_list('full_Name', 'spouse_Name', 'father_Name', 'mother_Name', 'Occupation',
+                                           'Gender', 'blood_Group',
+                                           'birth_date', 'phone', 'Darbar', 'Address', 'Pincode')
     for user in users:
         writer.writerow(user)
 

@@ -20,15 +20,15 @@
 	<nav class="navbar nav nav-pills navbar navbar-dark bg-dark navbar-expand-sm fixed-top">
 		<div class="container-fluid">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar"> <span class="navbar-toggler-icon"></span> </button>
-			<a class="navbar-brand mr-auto" href="{% url 'main' %}"><img src="{% static 'Image/img.jpg' %}" height="40" width="41"></a>
+			<a class="navbar-brand mr-auto" href="{% url 'data_entry:main' %}"><img src="{% static 'Image/img.jpg' %}" height="40" width="41"></a>
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link" href="{% url 'main' %}">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="{% url 'view' %}">View Entry</a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:main' %}">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:view' %}">View Entry</a></li>
 					<li class="nav-item"><a class="nav-link active" href="#">Data Entry</a></li>
 				</ul>
 			</div> <span class="navbar-text" id="logout">
-				<a href="{% url 'logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
+				<a href="{% url 'login:logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
 			</span>
 		</div>
 	</nav>
@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	<br>
-	<form method="post" action="{% url 'entry' %}" enctype="multipart/form-data"> {% csrf_token %}
+	<form method="post" action="{% url 'data_entry:entry' %}" enctype="multipart/form-data"> {% csrf_token %}
 		<div class="container-lg">
 			<div class="row row-content">
 				<div class="col-12 offset-md-4 col-md-4">
@@ -135,10 +135,9 @@
 					<div class="col-md-8">
 						<select id="Darbar" name="Darbar" class="form-control kem" required>
 							<option value="Please Select Darbar">Please Select Darbar</option>
-							<option value="Shri Anand Niwas Satsang ,Memnagar">Shri Anand Niwas Satsang ,Memnagar</option>
-							<option value="Shri Anand Niwas Satsang ,Maninagar">Shri Anand Niwas Satsang ,Maninagar</option>
-							<option value="Shri Anand Niwas Satsang ,Sardarnagar">Shri Anand Niwas Satsang ,Sardarnagar</option>
-							<option value="Shri Anand Niwas Satsang ,Saijpur">Shri Anand Niwas Satsang ,Saijpur</option>
+							{% for darbar in darbars %}
+							<option value="{{ darbar.darbar_name }}">{{ darbar.darbar_name }}</option>
+							{% endfor %}
 						</select>
 					</div>
 				</div>
@@ -156,7 +155,7 @@
 				</div>
 				<div class="col-12 offset-md-1 col-md-5">
 					<label for="myfile" class="col-md-4 col-form-label">Image:</label>
-					<input type="file" id="myfile" name="myfile" class="form-control" required>or <i class="fa fa-camera" aria-hidden="true"></i> </div>
+					<input type="file" id="myfile" name="myfile" class="form-control" required>or <a  onclick="window.open('{% url 'data_entry:camera' %}', 'newwindow','width=1390,height=670');"><i class="fa fa-camera" aria-hidden="true"></i></a></div>
 			</div>
 			<div class="row row-content">
 				<div class="col-6 offset-md-1 col-md-7">
@@ -184,5 +183,5 @@
 		</div>
 	</footer>
 </body>
-
+<script src="{% static 'js/main.js' %}"></script>
 </html>

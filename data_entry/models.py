@@ -1,7 +1,11 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
+
+class Darbar(models.Model):
+    darbar_name = models.CharField(max_length=500)
+    darbar_city = models.CharField(max_length=500)
 
 
 class Post(models.Model):
@@ -21,11 +25,12 @@ class Post(models.Model):
                       ('Shri Anand Niwas Satsang, SardarNagar', 'Shri Anand Niwas Satsang, Sardarnagar'),
                       ('Shri Anand Niwas Satsang, Sahjpur', 'Shri Anand Niwas Satsang, Sahjpur'))
     Blood_Choices = (
-    ('O+', 'O+'), ('O-', 'O-'), ('A+', 'A+'), ('A-', 'A-'), ('B+', 'B+'), ('B-', 'B-'), ('AB+', 'AB+'), ('AB-', 'AB-'),
-    ('Not Known', 'Not Known'))
+        ('O+', 'O+'), ('O-', 'O-'), ('A+', 'A+'), ('A-', 'A-'), ('B+', 'B+'), ('B-', 'B-'), ('AB+', 'AB+'),
+        ('AB-', 'AB-'),
+        ('Not Known', 'Not Known'))
     GENDER_CHOICES = (('Male', 'Male'), ('Female', 'Female'))
     full_Name = models.CharField(max_length=300)
-    spouse_Name = models.CharField(max_length=300,blank=True,null=True)
+    spouse_Name = models.CharField(max_length=300, blank=True, null=True)
     father_Name = models.CharField(max_length=300)
     mother_Name = models.CharField(max_length=300)
     Occupation = models.CharField(max_length=500, null=True, choices=Occupation_CHOICES)
@@ -38,11 +43,9 @@ class Post(models.Model):
     Pincode = models.CharField(max_length=6, default="Please Enter Pincode")
     image = models.ImageField(upload_to="images/")
     publishing_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User,on_delete=models.CASCADE,default=0,editable=False)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
-    verified = models.BooleanField(default=False)
-
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, editable=False)
+    flag = models.BooleanField(default=True)
+    city = models.CharField(max_length=200, default=None)
 
     class Meta:
         db_table = "post"

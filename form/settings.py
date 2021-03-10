@@ -21,16 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '2^t+dr&2(e5xdih8_qgc3-nq6$s9lm3ek3gr0z%qusy@9p^1mr'
-TWILIO_ACCOUNT_SID='AC838723d06bedae5035ce6c8cd29e3fce'
-TWILIO_AUTH_TOKEN='e97d86b1105a12c729c0d0a89f216a10'
-
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['shri-data-portal.herokuapp.com', '127.0.0.1']
 
-GOOGLE_MAPS_API_KEY = 'AIzaSyCy5tNQW8jP_DIzAPDDPa2R7qN5RbfC0FM'
 
 # Application definition
 
@@ -41,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
     'login',
     'phonenumber_field',
     'data_entry',
 ]
+
+AUTH_USER_MODEL = 'users.Account'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,8 +81,15 @@ WSGI_APPLICATION = 'form.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'my_data_portal',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+            "init_command": "SET foreign_key_checks = 0",
+        }
     }
 }
 
@@ -104,6 +110,10 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -127,6 +137,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
 
 
 MEDIA_URL = '/media/'

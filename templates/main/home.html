@@ -22,14 +22,14 @@
 	<nav class="navbar nav nav-pills navbar navbar-light navbar-expand-sm fixed-top">
 		<div class="container-fluid">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar"> <span class="navbar-toggler-icon"></span> </button>
-			<a class="navbar-brand mr-auto" href="{% url 'main' %}"><img src="{% static 'Image/img.jpg' %}" height="40" width="41"></a>&nbsp;
+			<a class="navbar-brand mr-auto" href="{% url 'data_entry:main' %}"><img src="{% static 'Image/img.jpg' %}" height="40" width="41"></a>&nbsp;
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a class="nav-link active" href="#">Home</a></li>&nbsp;&nbsp;
-					<li class="nav-item"><a class="nav-link" href="{% url 'view' %}">View Entry</a></li>&nbsp;&nbsp;
-					<li class="nav-item"><a class="nav-link" href="{% url 'portal' %}">Data Entry</a></li>&nbsp;&nbsp; </ul>
+					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:view' %}">View Entry</a></li>&nbsp;&nbsp;
+					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:portal' %}">Data Entry</a></li>&nbsp;&nbsp; </ul>
 			</div> <span class="navbar-text" id="logout">
-				<a  href="{% url 'logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
+				<a  href="{% url 'login:logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
 			</span>
 		</div>
 	</nav>

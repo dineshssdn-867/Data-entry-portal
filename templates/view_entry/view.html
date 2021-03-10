@@ -19,20 +19,20 @@
 	<nav class="navbar nav nav-pills navbar navbar-dark bg-dark navbar-expand-sm fixed-top">
 		<div class="container-fluid ">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar"> <span class="navbar-toggler-icon"></span> </button>
-			<a class="navbar-brand mr-auto" href="{% url 'main' %}"><img src="{% static 'Image/img.jpg' %}" height="40" width="41"></a>
+			<a class="navbar-brand mr-auto" href="{% url 'data_entry:main' %}"><img src="{% static 'Image/img.jpg' %}" height="40" width="41"></a>
 			<div class="collapse navbar-collapse" id="Navbar">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link" href="{% url 'main' %}">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:main' %}">Home</a></li>
 					<li class="nav-item"><a class="nav-link  active" href="#">View Entry</a></li>
-					<li class="nav-item"><a class="nav-link" href="{% url 'portal' %}">Data Entry</a></li>
-					<li class="nav-item"><a class="nav-link" href="{% url 'csv' %}">Export to Excel</a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:portal' %}">Data Entry</a></li>
+					<li class="nav-item"><a class="nav-link" href="{% url 'data_entry:csv' %}">Export to Excel</a></li>
 				</ul>
 				<form class="form-inline mr-3" method="get">
 					<input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
 			</div> <span class="navbar-text" id="logout">
-				<a href="{% url 'logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
+				<a href="{% url 'login:logout' %}" ><span class="fa fa-sign-out"></span> Logout</a>
 			</span>
 		</div>
 	</nav>
@@ -41,13 +41,14 @@
 			<div class="col-12 offset-md-4 col-md-4">
 				<h2 id="Entry">View Portal</h2> </div>
 		</div> {% for post in posts %}
+		{%  if post.flag %}
 		<div class="row disp1">
 			<div class="col-12 offset-md-1 col-md-10">
 				<div class="card bg-light text-left" style="max-width:90rem;">
 					<div class="row"> {% if post.image %}
 						<div class="col-12 col-md-3 fix ml-1"> <img class="card-img fix" src="{{post.image.url}}" alt="{{post.full_Name}}"> </div> {% endif %}
 						<div class="col-12 col-md-8 fix ml-0">
-							<h4 class="card-title">Name: {{post.full_Name}}{% if post.verified %}<img src="{% static 'LOGO/v.png' %}" width="50" height="30" type="image/x-icon">{% endif %}</h4>
+							<h4 class="card-title">Name: {{post.full_Name}}</h4>
 							<h6 class="card-text">Father's name: {{post.father_Name}}</h6>
 							<h6 class="card-text">Gender: {{post.Gender}}</h6>
 							<h6>Phone No: {{post.phone}}</h6>
@@ -55,31 +56,32 @@
 							<h6>Address:{{post.Address}}</h6> </div>
 					</div>
 					<div class="row mt-0 size">
-						<div class="col-12 offset-md-8 col-md-2"> <a href="{% url 'update' post.id %}" class="btn btn-primary btn-sm">View Entry</a> </div>
-						<div class="col-12 col-md-2 mb-2"> <a href="{% url 'delete' post.id %}" class="btn btn-danger btn-sm">Delete Entry</a> </div>
+						<div class="col-12 offset-md-8 col-md-2"> <a href="{% url 'data_entry:update' post.id %}" class="btn btn-primary btn-sm">View Entry</a> </div>
+						<div class="col-12 col-md-2 mb-2"> <a href="{% url 'data_entry:delete' post.id %}" class="btn btn-danger btn-sm">Delete Entry</a> </div>
 					</div>
 					<div class="card-footer"> <small class="text-muted">Last Updated {{post.publishing_date}} by {{post.user}}</small> </div>
 				</div>
 			</div>
+
 		</div>
 		<div class="row row-content disp">
 			<div class="col-12 offset-md-4 col-md-4">
 				<div class="card">
-					<div class="col-12 col-md-3 fix ml-1"> {% if post.image %} <img class="card-img fix" src="{{post.image.url}}" alt="{{post.full_Name}}"> </div> {% endif %}
+					<div class="col-12 col-md-3 fix ml-1">  </div>
 					<div class="card-body">
-						<h5 class="card-title mb-4">Name: {{post.full_Name}}{% if post.verified %}<img src="{% static 'LOGO/v.png' %}" width="50" height="30" type="image/x-icon">{% endif %}</h5>
 						<p class="card-text">Father's name: {{post.father_Name}}
 							<br> Phone No:{{post.phone}}
 							<br> Darbar: {{post.Darbar}}
 							<br> Address: {{post.Address}}</p>
 					</div>
 					<div class="row mt-0">
-						<div class="ml-2 col-6"> <a href="{% url 'update' post.id %}" class="btn btn-primary btn-sm">View Entry</a> </div>
-						<div class="col-5 col-md-2 mb-1"> <a href="{% url 'delete' post.id %}" class="btn btn-danger btn-sm">Delete Entry</a> </div>
+						<div class="ml-2 col-6"> <a href="{% url 'data_entry:update' post.id %}" class="btn btn-primary btn-sm">View Entry</a> </div>
+						<div class="col-5 col-md-2 mb-1"> <a href="{% url 'data_entry:delete' post.id %}" class="btn btn-danger btn-sm">Delete Entry</a> </div>
 					</div>
 					<div class="card-footer"> <small class="text-muted">Last Updated {{post.publishing_date}} by {{post.user}}</small> </div>
 				</div>
 			</div>
+			{% endif %}
 		</div>
 		<br> {% endfor %}
 		<div class="row row-content">

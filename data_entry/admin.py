@@ -1,26 +1,22 @@
-from django.conf import settings
 from django.contrib import admin
-
-from .models import Post
+from django.contrib.auth.admin import UserAdmin
+from .models import Post, Darbar
 
 
 class AdminPost(admin.ModelAdmin):
     list_filter = ['full_Name']
     search_fields = ['full_Name']
 
-
-    class Media:
-        if hasattr(settings, 'GOOGLE_MAPS_API_KEY') and settings.GOOGLE_MAPS_API_KEY:
-            css = {
-                'all': ('CSS/location_picker.css',),
-            }
-            js = (
-                'https://maps.googleapis.com/maps/api/js?key={}'.format(settings.GOOGLE_MAPS_API_KEY),
-                'js/location_picker.js',
-            )
-
     class meta:
         model = Post
 
 
+class DarbarPost(admin.ModelAdmin):
+    list_filter = ['darbar_city']
+    search_fields = ['darbar_city']
+
+    class meta:
+        model = Darbar
+
 admin.site.register(Post, AdminPost)
+admin.site.register(Darbar, DarbarPost)

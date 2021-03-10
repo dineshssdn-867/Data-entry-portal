@@ -16,7 +16,7 @@
 </head>
 
 <body class="animated_bg">
-	<form method="POST" action="{% url 'login' %}"> {% csrf_token %}
+	<form method="POST" action="{% url 'login:login' %}"> {% csrf_token %}
 		<div class="container-lg">
 			<div class="row row-content">
 				<div class="col-12 offset-md-3 col-md-6">
@@ -30,7 +30,7 @@
 					<p class="text-danger">*<b>{{ error }}</b></p> {% endfor %} {% endif %}
 					<label for="e-mail" class="col-md-2 col-form-label">Email:</label>
 					<div class="col-md-12">
-						<input type="text" placeholder="E-mail" class="form-control" id="e-mail" name="username">
+						<input type="text" placeholder="E-mail" class="form-control" id="e-mail" name="email">
 					</div>
 				</div>
 			</div>
