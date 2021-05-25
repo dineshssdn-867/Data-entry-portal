@@ -51,7 +51,7 @@ def entry_view(request):
         post.user = request.user
         post.city = request.user.city
         post.save()
-        #for full_Name, father_Name, mother_Name in Post.objects.values_list('full_Name','father_Name', 'mother_Name', flat=False).distinct():
+        # for full_Name, father_Name, mother_Name in Post.objects.values_list('full_Name','father_Name', 'mother_Name', flat=False).distinct():
         #    Post.objects.filter(
         #        pk__in=Post.objects.filter(full_Name=full_Name, father_Name=father_Name, mother_Name=mother_Name).values_list('id', flat=False)[1:]).delete()
         return redirect("data_entry:main")
@@ -62,7 +62,6 @@ def entry_view(request):
 @login_required(login_url='login:index')
 def camera_view(request):
     return render(request, "data_entry/winner.html")
-
 
 
 @login_required(login_url='login:index')

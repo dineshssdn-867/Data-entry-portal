@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){var t=new Date,e=t.getDate(),n=t.getMonth()+1,a=t.getFullYear()-4;10>e&&(e="0"+e),10>n&&(n="0"+n),t=a+"-"+n+"-"+e,document.getElementById("birth_date").setAttribute("max",t)});

@@ -49,6 +49,7 @@ class Post(models.Model):
 
     class Meta:
         db_table = "post"
+        ordering = ['-id']
 
     def __str__(self):
         return self.full_Name

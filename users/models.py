@@ -45,7 +45,5 @@ class Account(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'Account'
-
-    class Meta:
         verbose_name = 'user'
         verbose_name_plural = 'users'

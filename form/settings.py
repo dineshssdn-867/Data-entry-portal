@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 import django_heroku
 from pathlib import Path
+import cloudinary
+import cloudinary_storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,18 +43,25 @@ INSTALLED_APPS = [
     'login',
     'phonenumber_field',
     'data_entry',
+    'cloudinary_storage',
+    'cloudinary',
+    'pwa',
 ]
 
 AUTH_USER_MODEL = 'users.Account'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
     'ipinfo_django.middleware.IPinfo',
 ]
 
@@ -82,7 +91,7 @@ WSGI_APPLICATION = 'form.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'my_data_portal',
+        'NAME': 'data_portal',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -131,18 +140,54 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/portal/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'login:index'
 LOGOUT_REDIRECT_URL = 'login:index'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dineshscloud',
+    'API_KEY': '858455229732434',
+    'API_SECRET': 'VTDlyF-OhpkS9hOvqxxBCMqGT3A',
+}
+
+
+PWA_APP_NAME = "Shri data portal"
+PWA_APP_DESCRIPTION = "This portal is for data entry for a particular organization."
+PWA_APP_BACKGROUND_COLOR = '#FFFFFF'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/home'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_THEME_COLOR = '#0A0302'
+PWA_APP_ICONS = [
+    {
+        'src': 'static/LOGO/pwa_logo.png',
+        'sizes': '512x512', 'purpose': 'any maskable',
+        'src': 'static/LOGO/pwa_logo.png',
+        'sizes': '512x512', 'purpose': 'any maskable'}
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': 'static/LOGO/pwa_logo.png',
+        'sizes': '512x512'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [{'src': 'static/LOGO/img2.png',
+                          'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'}]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
+PWA_APP_DEBUG_MODE = True
+
 
 django_heroku.settings(locals())
