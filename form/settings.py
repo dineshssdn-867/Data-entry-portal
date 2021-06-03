@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2^t+dr&2(e5xdih8_qgc3-nq6$s9lm3ek3gr0z%qusy@9p^1mr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['shri-data-portal.herokuapp.com', '127.0.0.1']
 
@@ -129,7 +129,7 @@ AUTHENTICATION_BACKENDS = (
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "Asia/Kolkata"
 
 USE_I18N = True
 
@@ -155,9 +155,9 @@ LOGIN_REDIRECT_URL = 'login:index'
 LOGOUT_REDIRECT_URL = 'login:index'
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dineshscloud',
-    'API_KEY': '858455229732434',
-    'API_SECRET': 'VTDlyF-OhpkS9hOvqxxBCMqGT3A',
+    'CLOUD_NAME': 'usename',
+    'API_KEY': 'api_key',
+    'API_SECRET': 'secret_key',
 }
 
 
@@ -187,7 +187,7 @@ PWA_APP_SPLASH_SCREEN = [{'src': 'static/LOGO/img2.png',
                           'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'}]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'en-US'
-PWA_APP_DEBUG_MODE = True
+PWA_APP_DEBUG_MODE = False
 
 
 django_heroku.settings(locals())
